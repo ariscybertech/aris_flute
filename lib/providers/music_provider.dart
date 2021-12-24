@@ -1,4 +1,4 @@
-// import 'package:audioplayers/audioplayers.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
 class MusicProvider extends ChangeNotifier {
@@ -9,7 +9,7 @@ class MusicProvider extends ChangeNotifier {
   static Duration _currentDuration;
   static Duration _totalDuration;
   static bool _isPlaying;
-  // static AudioPlayer _playerInstance;
+  static AudioPlayer _playerInstance;
 
   void setMusic([
     artist,
@@ -35,18 +35,18 @@ class MusicProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // set audioInstance(AudioPlayer player) {
-  //   _playerInstance = player;
-  //   notifyListeners();
-  // }
+  set audioInstance(AudioPlayer player) {
+    _playerInstance = player;
+    notifyListeners();
+  }
 
   get path {
     return _path;
   }
 
-  // get audioInstance {
-  //   return _playerInstance;
-  // }
+  get audioInstance {
+    return _playerInstance;
+  }
 
   get currentDuration {
     return _currentDuration != null ? _currentDuration.inMilliseconds : 0;

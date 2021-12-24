@@ -5,7 +5,7 @@ import 'package:flute/widgets/homepage/artists.dart';
 import 'package:flute/widgets/homepage/genres.dart';
 import 'package:flute/widgets/homepage/header.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_audio_query/flutter_audio_query.dart';
+import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,8 +15,8 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  // FlutterAudioQuery _audioQuery;
-  // List<SongInfo> _songs = [];
+  FlutterAudioQuery _audioQuery;
+  List<SongInfo> _songs = [];
   @override
   void initState() {
     /**
@@ -31,38 +31,38 @@ class _HomepageState extends State<Homepage> {
   void fetchTracks() async {
     // SharedPreferences sp = await SharedPreferences.getInstance()
 
-    // _audioQuery = FlutterAudioQuery();
-    // _songs = await _audioQuery.getSongs();
+    _audioQuery = FlutterAudioQuery();
+    _songs = await _audioQuery.getSongs();
 
     // sp.setStringList('song_list', songListMap(_songs))
 
-    // songListMap(_songs);
+    songListMap(_songs);
   }
 
-  // dynamic songListMap(List<SongInfo> songs) {
-  //   Map artists = {};
-  //   Map albums = {};
+  dynamic songListMap(List<SongInfo> songs) {
+    Map artists = {};
+    Map albums = {};
 
-  //   return songs.map((song) {
-  //     if (artists[song.artist] == null) {
-  //       artists[song.artist] = [];
-  //     }
+    return songs.map((song) {
+      if (artists[song.artist] == null) {
+        artists[song.artist] = [];
+      }
 
-  //     if (albums[song.album] == null) {
-  //       albums[song.album] = [];
-  //     }
+      if (albums[song.album] == null) {
+        albums[song.album] = [];
+      }
 
-  //     artists[song.artist].add(song);
-  //     albums[song.album].add(song);
+      artists[song.artist].add(song);
+      albums[song.album].add(song);
 
-  //     print(artists);
-  //     return {
-  //       "song_list": song.toMap,
-  //       "artists": artists,
-  //       "albums": albums,
-  //     };
-  //   }).toList();
-  // }
+      print(artists);
+      return {
+        "song_list": song.toMap,
+        "artists": artists,
+        "albums": albums,
+      };
+    }).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,23 +75,23 @@ class _HomepageState extends State<Homepage> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(SimpleLineIcons.home),
-            // title: Text('Home'),
+            title: Text('Home'),
           ),
           BottomNavigationBarItem(
             icon: Icon(SimpleLineIcons.clock),
-            // title: Text('Recent'),
+            title: Text('Recent'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Feather.play),
-            // title: Text('Play'),
+            title: Text('Play'),
           ),
           BottomNavigationBarItem(
             icon: Icon(SimpleLineIcons.playlist),
-            // title: Text('Playlist'),
+            title: Text('Playlist'),
           ),
           BottomNavigationBarItem(
             icon: Icon(SimpleLineIcons.settings),
-            // title: Text('Settings'),
+            title: Text('Settings'),
           ),
         ],
       ),
@@ -122,13 +122,13 @@ class _HomepageState extends State<Homepage> {
                     Expanded(
                       child: Text(
                         "Albums",
-                        // style: _theme.textTheme.title,
+                        style: _theme.textTheme.title,
                       ),
                     ),
                     InkWell(
                       child: Text(
                         "View More >",
-                        style: _theme.textTheme.subtitle2.merge(
+                        style: _theme.textTheme.subtitle.merge(
                           TextStyle(
                             color: _theme.primaryColor,
                             fontWeight: FontWeight.w600,
